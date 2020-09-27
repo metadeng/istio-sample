@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lvtuben.istio.order.mapper.OrderDAOMapper">
+    <resultMap id="BaseResultMap" type="com.lvtuben.istio.order.dao.OrderDAO">
+        <!--@mbg.generated-->
+        <!--@Table tab_order-->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="u_id" jdbcType="VARCHAR" property="uId"/>
+        <result column="cost" jdbcType="FLOAT" property="cost"/>
+        <result column="num" jdbcType="INTEGER" property="num"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, u_id, cost, num, create_time, update_time, `status`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from tab_order
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete from tab_order
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.lvtuben.istio.order.dao.OrderDAO">
+        <!--@mbg.generated-->
+        insert into tab_order (id, u_id, cost,
+        num, create_time, update_time,
+        `status`)
+        values (#{id,jdbcType=VARCHAR}, #{uId,jdbcType=VARCHAR}, #{cost,jdbcType=FLOAT},
+        #{num,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{status,jdbcType=INTEGER})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.lvtuben.istio.order.dao.OrderDAO">
+        <!--@mbg.generated-->
+        update tab_order
+        set u_id = #{uId,jdbcType=VARCHAR},
+        cost = #{cost,jdbcType=FLOAT},
+        num = #{num,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        `status` = #{status,jdbcType=INTEGER}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <resultMap id="queryForListMap" type="com.lvtuben.istio.order.dao.OrderDAO">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="u_id" property="uId" jdbcType="VARCHAR"/>
+        <result column="cost" property="cost" jdbcType="FLOAT"/>
+        <result column="total_num" property="num" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="update_time" property="updateTime" jdbcType="DATE"/>
+        <collection property="orderDetailDAOList" javaType="java.util.List"
+                    ofType="com.lvtuben.istio.order.dao.OrderDetailDAO">
+            <result column="odid" property="id" jdbcType="VARCHAR"/>
+            <result column="b_id" property="bId" jdbcType="VARCHAR"/>
+            <result column="num" property="num" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    <select id="getOrderById" resultMap="queryForListMap">
+    SELECT o.id,o.u_id,o.cost,o.num as total_num,o.create_time,o.update_time,o.`status`,od.id as odid,od.b_id,od.num
+        FROM tab_order o
+        left JOIN tab_order_detail od
+        ON o.id=od.o_id
+        WHERE o.id=#{id};
+    </select>
+</mapper>

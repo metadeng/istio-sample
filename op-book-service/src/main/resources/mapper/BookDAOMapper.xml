@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lvtuben.istio.book.mapper.BookDAOMapper">
+  <resultMap id="BaseResultMap" type="com.lvtuben.istio.book.dao.BookDAO">
+    <!--@mbg.generated-->
+    <!--@Table tab_book-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="price" jdbcType="FLOAT" property="price" />
+    <result column="b_id" jdbcType="VARCHAR" property="bId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, author, price, b_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from tab_book
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from tab_book
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lvtuben.istio.book.dao.BookDAO">
+    <!--@mbg.generated-->
+    insert into tab_book (id, `name`, author, 
+      price, b_id)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{price,jdbcType=FLOAT}, #{bId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lvtuben.istio.book.dao.BookDAO">
+    <!--@mbg.generated-->
+    update tab_book
+    set `name` = #{name,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      price = #{price,jdbcType=FLOAT},
+      b_id = #{bId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

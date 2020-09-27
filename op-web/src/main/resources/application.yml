@@ -1,0 +1,29 @@
+server:
+  port: 8083
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: op-web
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      max-active: 50
+      min-idle: 5
+    password: admin0809!
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/istio_sample?useUnicode=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+
+dubbo:
+  application:
+    name: op-web
+    qos-enable: false
+    qos-accept-foreign-ip: false
+  consumer:
+    check: false
+    timeout: 4000
+  registry:
+    address: nacos://10.128.9.93:8848
