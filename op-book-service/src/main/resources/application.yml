@@ -32,3 +32,12 @@ dubbo:
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
