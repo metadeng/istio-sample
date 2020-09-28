@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: op-order-service
+  cloud:
+    nacos:
+      config:
+        file-extension: yml
+        namespace: 2b3eb3d6-965b-4e64-a1bf-96c98e1ac181
+        server-addr: 10.128.9.93:8848
+  main:
+    allow-bean-definition-overriding: true

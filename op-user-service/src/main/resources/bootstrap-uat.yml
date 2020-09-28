@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: op-user-service
+  cloud:
+    nacos:
+      config:
+        file-extension: yml
+        namespace: 70df094f-2c79-48a9-94e5-6265972d633e
+        server-addr: 10.128.9.93:8848
+  main:
+    allow-bean-definition-overriding: true

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: op-book-service
+  cloud:
+    nacos:
+      config:
+        file-extension: yml
+        namespace: dbfafe8b-cb91-472d-a821-d25447c7a548
+        server-addr: 10.128.9.93:8848
+  main:
+    allow-bean-definition-overriding: true
